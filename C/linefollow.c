@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 
-const uint min_motor_speed = 50;
+const uint min_motor_speed = 25;
 int lookup_table[32] = {0};
 
 const uint8_t ir_pins[] = {18, 19, 20, 21, 22};
@@ -16,7 +16,7 @@ int speed(int error)
     int ethresh = 0;
     int r = 5;
     int c = 100 - min_motor_speed;
-    int m = 1.8;
+    int m = 2.2;    
     double s = 0;
     if (abs(error) >= ethresh)
     {
