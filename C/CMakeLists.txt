@@ -37,7 +37,7 @@ add_library(motor_driver motor_driver.c)
 target_link_libraries(motor_driver hardware_gpio hardware_clocks hardware_pwm)
 # Add the standard library to the build
 target_link_libraries(linefollow
-        pico_stdlib  motor_driver)
+        pico_stdlib  motor_driver pico_bootsel_via_double_reset pico_double)
 target_compile_options(linefollow PRIVATE -Wall)
 # Add the standard include files to the build
 target_include_directories(linefollow PRIVATE
