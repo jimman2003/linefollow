@@ -76,7 +76,15 @@ int main()
             error = lookup_table[measurement];
         }
         printf("%d\n", measurement);
-        set_motors_speed(speed(error) + (error * p), speed(error) - (error * p));
+        int left_motor=speed(error) + (error * p);
+        int right_motor=speed(error) - (error * p);
+        if (left_motor < 0){
+            left_motor=0;
+        }
+        if (right_motor < 0){
+            right_motor=0;
+        }
+        set_motors_speed(left_motor,right_motor);
         last_error = error;
     }
 
