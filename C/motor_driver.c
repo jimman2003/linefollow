@@ -8,8 +8,8 @@
 #define MOTOR2_PWM_PIN_A 11
 #define MOTOR2_PWM_PIN_B 10
 
-static uint32_t analogScale = 255;
-static uint32_t analogFreq = 1000;
+static uint32_t analogScale = 1023;
+static uint32_t analogFreq = 200;
 static uint32_t pwmInitted = 0;
 static bool scaleInitted = false;
 static uint16_t analogWritePseudoScale = 1;

@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 
-const uint min_motor_speed = 255*0.7; //up to 255
+const uint min_motor_speed = 1023*0.7; //up to 255
 int lookup_table[32] = {0};
 
 const uint8_t ir_pins[] = {18, 19, 20, 21, 22};
@@ -15,7 +15,7 @@ int speed(int error)
 {
     int ethresh = 0;
     int r = 5;
-    int c = 255 - min_motor_speed;
+    int c = 1023 - min_motor_speed;
     int m = 2.2;    
     double s = 0;
     if (abs(error) >= ethresh)
@@ -26,7 +26,8 @@ int speed(int error)
     {
         s = 1;
     }
-    return min_motor_speed + c * (pow(s,m));
+    int test = min_motor_speed + c * (pow(s,m));
+    return 1023;
 }
 int main()
 {
@@ -47,7 +48,7 @@ int main()
     }
 
     const uint8_t num_ir_sensors = 5;
-    const uint8_t p = 21;
+    const uint8_t p = 150;
     int last_error = 0;
 
     while (true)
