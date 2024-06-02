@@ -2,11 +2,11 @@
 #include "hardware/clocks.h"
 #include "hardware/gpio.h"
 
-#define MOTOR1_PWM_PIN_A 13 // Example pin for motor PWM A, change to your pin
-#define MOTOR1_PWM_PIN_B 12
+#define MOTOR1_PWM_PIN_A 13 // Motor 1A
+#define MOTOR1_PWM_PIN_B 12 // Motor 1B
 
-#define MOTOR2_PWM_PIN_A 11
-#define MOTOR2_PWM_PIN_B 10
+#define MOTOR2_PWM_PIN_A 11 // Motor 2A
+#define MOTOR2_PWM_PIN_B 10 // Motor 2B
 
 static uint32_t analogScale = 1023;
 static uint32_t analogFreq = 200;
@@ -14,6 +14,8 @@ static uint32_t pwmInitted = 0;
 static bool scaleInitted = false;
 static uint16_t analogWritePseudoScale = 1;
 static uint16_t analogWriteSlowScale = 1;
+
+// Inspired from arduino-pico library
 void analogWrite(uint8_t pin, int val)
 {
     if (!scaleInitted)
@@ -56,7 +58,7 @@ void analogWrite(uint8_t pin, int val)
     gpio_set_function(pin, GPIO_FUNC_PWM);
     pwm_set_gpio_level(pin, val);
 }
-
+//Adapted from https://github.com/CytronTechnologies/CytronMotorDriver/blob/master/CytronMotorDriver.cpp
 void set_motor_speed(uint8_t pin_a,uint8_t pin_b,int speed)
 {
     if (speed >= 0)
@@ -70,12 +72,12 @@ void set_motor_speed(uint8_t pin_a,uint8_t pin_b,int speed)
         analogWrite(pin_b, -speed);
     }
 }
-
+//Adapted from https://github.com/CytronTechnologies/CytronMotorDriver/blob/master/CytronMotorDriver.cpp
 void set_motors_speed(int speedLeft, int speedRight){
     set_motor_speed(MOTOR1_PWM_PIN_A,MOTOR1_PWM_PIN_B,speedLeft);
     set_motor_speed(MOTOR2_PWM_PIN_A,MOTOR2_PWM_PIN_B,speedRight);
 }
-
+//Adapted from https://github.com/CytronTechnologies/CytronMotorDriver/blob/master/CytronMotorDriver.cpp
 void motor_brake() {
     set_motors_speed(0,0);
 }
